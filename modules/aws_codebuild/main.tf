@@ -7,6 +7,7 @@ resource "aws_codebuild_project" "project" {
   source {
     type            = "${var.srcType}" // Options Available: "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET", "S3", "NO_SOURCE"
     location        = "${var.srcLocation}"
+    buildspec       = "${var.buildSpecFilePath}"
     git_clone_depth = 1
     
     git_submodules_config {

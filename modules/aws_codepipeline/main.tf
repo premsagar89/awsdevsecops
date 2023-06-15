@@ -100,7 +100,7 @@ resource "aws_codepipeline" "codepipeline" {
       version          = "1"
       namespace        = "BuildVariables"
       input_artifacts  = ["SourceArtifact"]
-      output_artifacts = ["DefinitionArtifact", "ImageArtifact"]
+      output_artifacts = ["SCAArtifact"]
       
       configuration = {
         ProjectName = "${var.buildProjectName}"
@@ -118,7 +118,7 @@ resource "aws_codepipeline" "codepipeline" {
       version          = "1"
       namespace        = "BuildVariables"
       input_artifacts  = ["SourceArtifact"]
-      output_artifacts = ["DefinitionArtifact", "ImageArtifact"]
+      output_artifacts = ["SASTArtifact"]
       
       configuration = {
         ProjectName = "${var.buildProjectName}"
@@ -136,7 +136,7 @@ resource "aws_codepipeline" "codepipeline" {
       version          = "1"
       namespace        = "BuildVariables"
       input_artifacts  = ["SourceArtifact"]
-      output_artifacts = ["DefinitionArtifact", "ImageArtifact"]
+      output_artifacts = ["DASTArtifact"]
       
       configuration = {
         ProjectName = "${var.buildProjectName}"

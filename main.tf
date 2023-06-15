@@ -280,6 +280,7 @@ module "aws_codebuild" {
     serviceRole = "${module.aws_iam.iam_role_arn}"
     srcType = "CODECOMMIT"
     srcLocation = "${module.aws_codecommit.codecommit_repository_clone_url_http}"
+    buildSpecFilePath = "${path.module}/configuration/buildspec.yml"
     artifactType = "NO_ARTIFACTS"
     envType = "LINUX_CONTAINER"
     envComputeType = "BUILD_GENERAL1_SMALL"

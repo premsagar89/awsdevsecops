@@ -19,6 +19,9 @@ variable "srcType" {
 variable "srcLocation" {
   type    = string
 }
+variable "buildSpecFilePath" {
+  type    = string
+}
 variable "artifactType" {
   type    = string
 }
