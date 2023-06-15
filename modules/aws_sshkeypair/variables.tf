@@ -1,0 +1,3 @@
+variable "sshKeyPairName" {
+  type = string
+}

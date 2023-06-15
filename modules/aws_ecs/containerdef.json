@@ -1,0 +1,16 @@
+[
+    {
+        "name": "demoContainer1",
+        "image": "949307570634.dkr.ecr.us-east-1.amazonaws.com/base_images:nginx",
+        "cpu": 0,
+        "memory": 512,
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 80,
+                "containerport": 80,
+                "protocol": "tcp"
+            }
+        ]
+    }
+]

@@ -1,0 +1,41 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: latest
+    commands:
+      - echo "Installing Python..."
+      - apt install python3
+  pre_build:
+    commands:
+      - echo "#########################_PRE-BUILD-PHASE_#########################"
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 949307570634.dkr.ecr.us-east-1.amazonaws.com
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+      - REPOSITORY_URI=949307570634.dkr.ecr.us-east-1.amazonaws.com/demoRepository
+      - echo  $IMAGE_TAG
+      - echo $REPOSITORY_URI
+      - IMAGE_URI=$REPOSITORY_URI:$IMAGE_TAG
+  build:
+    commands:
+      - echo "#########################_BUILD-PHASE_#########################"
+      - echo "Build started on `date` "
+      - docker build -t demoRepository:$IMAGE_TAG .
+      - docker tag demoRepository:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo "#########################_POST-BUILD-PHASE_#########################"
+      - echo "Build completed on `date` "
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - printf '{"ImageURI":"%s"}' $IMAGE_URI > imageDetail.json
+artifacts:
+  files:
+    - "*.yml"
+    - "*.json"
+  secondary-artifacts:
+    DefinitionArtifact:
+      files:
+        - 'appspec.yml'
+        - 'taskdef.json'
+    ImageArtifact:
+      files:
+        - 'imageDetail.json'

@@ -1,0 +1,8 @@
+"ec2.amazonaws.com",
+"lambda.amazonaws.com",
+"codecommit.amazonaws.com",
+"codebuild.amazonaws.com",
+"codedeploy.amazonaws.com",
+"codepipeline.amazonaws.com",
+"cloudformation.amazonaws.com",
+"elasticbeanstalk.amazonaws.com"

@@ -1,0 +1,29 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "<TASK_DEFINITION>"
+        LoadBalancerInfo:
+          ContainerName: "demoContainer1"
+          ContainerPort: 80
+        # Optional properties
+        PlatformVersion: "LATEST"
+        NetworkConfiguration:
+          AwsvpcConfiguration:
+            Subnets: "${var.defaultVPCSubnets}"
+            SecurityGroups: "${module.aws_security_group.sg_name}"
+            AssignPublicIp: "ENABLED"
+        # CapacityProviderStrategy:
+          # - Base: 1
+          #   CapacityProvider: "FARGATE_SPOT"
+          #   Weight: 2
+          # - Base: 0
+          #   CapacityProvider: "FARGATE"
+          #   Weight: 1
+# Hooks:
+#   - BeforeInstall: "LambdaFunctionToValidateBeforeInstall"
+#   - AfterInstall: "LambdaFunctionToValidateAfterInstall"
+#   - AfterAllowTestTraffic: "LambdaFunctionToValidateAfterTestTrafficStarts"
+#   - BeforeAllowTraffic: "LambdaFunctionToValidateBeforeAllowingProductionTraffic"
+#   - AfterAllowTraffic: "LambdaFunctionToValidateAfterAllowingProductionTraffic"
