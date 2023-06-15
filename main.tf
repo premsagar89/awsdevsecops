@@ -274,16 +274,20 @@ module "aws_codebuild" {
     source = "./modules/aws_codebuild"
     depends_on = [ module.aws_codecommit ]
     projectName = "DemoProject"
-    projectDesc = "A Sample Demo Project for Testing"
+    projectDesc = "Sample Demo Project for Testing"
     cloudwatchLogGroupName = "DemoLogGroup"
     cloudwatchLogStreamName = "DemoLogStream"
     serviceRole = "${module.aws_iam.iam_role_arn}"
     srcType = "CODECOMMIT"
     srcLocation = "${module.aws_codecommit.codecommit_repository_clone_url_http}"
-    buildSpecFilePath = "${path.module}/configuration/buildspec.yml"
     artifactType = "NO_ARTIFACTS"
     envType = "LINUX_CONTAINER"
     envComputeType = "BUILD_GENERAL1_SMALL"
+
+    buildSpecFilePath = "${path.module}/configuration/buildspec.yml"
+    scaBuildSpecFilePath = "${path.module}/configuration/buildspec-owasp-depedency-check.yml"
+    sastBuildSpecFilePath = "${path.module}/configuration/buildspec-phpstan.yml"
+    dastBuildSpecFilePath = "${path.module}/configuration/buildspec-owasp-zap.yml"
 }
 output "aws_codebuild" {
     value = module.aws_codebuild
@@ -326,6 +330,9 @@ module "aws_codepipeline" {
     branchName = "${module.aws_codecommit.codecommit_repository_default_branch}"
 
     buildProjectName = "${module.aws_codebuild.codebuild_project_name}"
+    scaBuildProjectName = "${module.aws_codebuild.codebuild_project_name}"
+    sastBuildProjectName = "${module.aws_codebuild.codebuild_project_name}"
+    dastBuildProjectName = "${module.aws_codebuild.codebuild_project_name}"
 
     appName = "${module.aws_codedeploy.codedeploy_app_name}"
     deploymentGroupName = "${module.aws_codedeploy.code_deployment_group_name}"

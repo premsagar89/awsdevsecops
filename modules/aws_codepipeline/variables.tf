@@ -4,6 +4,15 @@ variable "pipelineName" {
 variable "buildProjectName" {
   type    = string
 }
+variable "scaBuildProjectName" {
+  type    = string
+}
+variable "sastBuildProjectName" {
+  type    = string
+}
+variable "dastBuildProjectName" {
+  type    = string
+}
 variable "serviceRole" {
   type    = string
 }

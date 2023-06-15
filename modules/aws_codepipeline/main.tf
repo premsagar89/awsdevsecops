@@ -98,12 +98,12 @@ resource "aws_codepipeline" "codepipeline" {
       owner            = "AWS"
       provider         = "CodeBuild"
       version          = "1"
-      namespace        = "BuildVariables"
+      namespace        = "SCAVariables"
       input_artifacts  = ["SourceArtifact"]
       output_artifacts = ["SCAArtifact"]
       
       configuration = {
-        ProjectName = "${var.buildProjectName}"
+        ProjectName = "${var.scaBuildProjectName}"
       }
     }
   }
@@ -116,12 +116,12 @@ resource "aws_codepipeline" "codepipeline" {
       owner            = "AWS"
       provider         = "CodeBuild"
       version          = "1"
-      namespace        = "BuildVariables"
+      namespace        = "SASTVariables"
       input_artifacts  = ["SourceArtifact"]
       output_artifacts = ["SASTArtifact"]
       
       configuration = {
-        ProjectName = "${var.buildProjectName}"
+        ProjectName = "${var.sastBuildProjectName}"
       }
     }
   }
@@ -134,12 +134,12 @@ resource "aws_codepipeline" "codepipeline" {
       owner            = "AWS"
       provider         = "CodeBuild"
       version          = "1"
-      namespace        = "BuildVariables"
+      namespace        = "DASTVariables"
       input_artifacts  = ["SourceArtifact"]
       output_artifacts = ["DASTArtifact"]
       
       configuration = {
-        ProjectName = "${var.buildProjectName}"
+        ProjectName = "${var.dastBuildProjectName}"
       }
     }
   }

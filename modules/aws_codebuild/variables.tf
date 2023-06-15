@@ -22,6 +22,15 @@ variable "srcLocation" {
 variable "buildSpecFilePath" {
   type    = string
 }
+variable "scaBuildSpecFilePath" {
+  type    = string
+}
+variable "sastBuildSpecFilePath" {
+  type    = string
+}
+variable "dastBuildSpecFilePath" {
+  type    = string
+}
 variable "artifactType" {
   type    = string
 }
